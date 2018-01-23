@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TexterApp.Controllers.Models;
 using TexterApp.Models;
 
 namespace TexterApp.Controllers
@@ -30,6 +31,18 @@ namespace TexterApp.Controllers
             return RedirectToAction("Index");
         }
 
-        //sfsd
+        //Contacts
+        public IActionResult NewContact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult NewContact(Contact item)
+        {
+            //db.Contacts.Add(item);
+            //db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
