@@ -1,0 +1,19 @@
+﻿@model IEnumerable<TexterApp.Models.Contact>
+
+<h2>All Contacts</h2>
+<hr />
+<ol>
+    @foreach (var Contact in Model)
+    {
+        <li>
+            <ul>
+                <li>First Name: @Html.DisplayFor(modelItem => Contact.FirstName)</li>
+                <li>Last Name: @Html.DisplayFor(modelItem => Contact.LastName)</li>
+                <li>Phone Nubmer: @Html.DisplayFor(modelItem => Contact.Number)</li>
+            </ul>
+        </li>
+    }
+</ol>
+
+@Html.ActionLink("Back home", "Index")
+@Html.ActionLink("View Contacts", "AddressBook")

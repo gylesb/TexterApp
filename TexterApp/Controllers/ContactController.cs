@@ -1,85 +1,81 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Identity;
-//using TexterApp.Models;
-//using System.Security.Claims;
-//using Microsoft.AspNetCore.Mvc.Rendering;
-//using Microsoft.EntityFrameworkCore;
-
-//namespace TexterApp.Controllers
-//{
-
-//	public class ContactController : Controller
-//	{
-//		private readonly ApplicationDbContext _db;
-//		private readonly UserManager<ApplicationUser> _userManager;
-
-//		public ContactController(UserManager<ApplicationUser> userManager, ApplicationDbContext db)
-//		{
-//			_userManager = userManager;
-//			_db = db;
-//		}
-
-//		public async Task<IActionResult> Index()
-//		{
-//			var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-//			var currentUser = await _userManager.FindByIdAsync(userId);
-//			return View(_db.Contacts.Where(x => x.User.Id == currentUser.Id));
-//		}
-
-//		public IActionResult Create()
-//		{
-//			return View();
-//		}
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using TexterApp.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 
-//		[HttpPost]
-//		public async Task<IActionResult> Create(Contact contact)
-//		{
-//			_db.Contacts.Add(contact);
-//			_db.SaveChanges();
-//			return RedirectToAction("Index");
-//		}
+namespace TexterApp.Controllers
+{
 
-//		public IActionResult Details(int id)
-//		{
-//			var thisContact = _db.Contacts
-//								  .Include(x => x.Messages)
-//								  .FirstOrDefault(items => items.ContactId == id);
-//			return View(thisContact);
-//		}
+	public class ContactController : Controller
+	{
+		private readonly TexterAppDbContext _db;
 
-//		public IActionResult Edit(int id)
-//		{
-//			var thisContact = _db.Contacts.FirstOrDefault(names => names.ContactId == id);
-//			return View(thisContact);
-//		}
+		public ContactController(TexterAppDbContext db)
+		{
+			_db = db;
+		}
 
-//		[HttpPost]
-//		public async Task<IActionResult> Edit(Contact contact)
-//		{
-//			_db.Contacts.Update(contact);
-//			_db.SaveChanges();
-//			return RedirectToAction("Index");
-//		}
+        //Add Contact
+		public IActionResult AddContact()
+		{
+			return View();
+		}
 
-//		public IActionResult Delete(int id)
-//		{
-//			var thisContact = _db.Contacts.FirstOrDefault(names => names.ContactId == id);
-//			return View(thisContact);
-//		}
 
-//		[HttpPost, ActionName("Delete")]
-//		public IActionResult DeleteConfirmed(int id)
-//		{
-//			var thisContact = _db.Contacts.FirstOrDefault(names => names.ContactId == id);
-//			_db.Remove(thisContact);
-//			_db.SaveChanges();
-//			return RedirectToAction("Index");
-//		}
-//	}
-//}
+        [HttpPost]
+        public IActionResult AddContact(Contact contact)
+        {
+            _db.Contacts.Add(contact);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //Contact Details
+        public IActionResult Details(int id)
+		{
+			var thisContact = _db.Contacts
+								  //.Include(x => x.Messages)
+								  .FirstOrDefault(items => items.ContactId == id);
+			return View(thisContact);
+		}
+
+        //Edit Contact
+		public IActionResult Edit(int id)
+		{
+			var thisContact = _db.Contacts.FirstOrDefault(names => names.ContactId == id);
+			return View(thisContact);
+		}
+
+        [HttpPost]
+        public IActionResult Edit(Contact contact)
+        {
+            _db.Contacts.Update(contact);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //Delete Contact
+        public IActionResult Delete(int id)
+		{
+			var thisContact = _db.Contacts.FirstOrDefault(names => names.ContactId == id);
+			return View(thisContact);
+		}
+
+		[HttpPost, ActionName("Delete")]
+		public IActionResult DeleteConfirmed(int id)
+		{
+			var thisContact = _db.Contacts.FirstOrDefault(names => names.ContactId == id);
+			_db.Remove(thisContact);
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
+	}
+}

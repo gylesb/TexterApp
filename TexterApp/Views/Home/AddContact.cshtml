@@ -5,16 +5,23 @@
 <hr />
 @using(Html.BeginForm())
 {
-    @Html.LabelFor(model => model.Name)
-    @Html.TextBoxFor(model => model.Name)
+    @Html.LabelFor(model => model.FirstName)
+    @Html.TextBoxFor(model => model.FirstName)
+    <br />
+    <br />
+    @Html.LabelFor(model => model.LastName)
+    @Html.TextBoxFor(model => model.LastName)
     <br />
     <br />
     @Html.LabelFor(model => model.Number)
     @Html.TextBoxFor(model => model.Number)
     <br />
     <br />
-    <input type = "submit" value = "Create" />
+    <input type ="submit" value ="Create" />
 }
 <br />
 <br />
+<br />
 @Html.ActionLink("Back home", "Index")
+@Html.ActionLink("View Messages", "GetMessages")
+@Html.ActionLink("View Contacts", "AddressBook")

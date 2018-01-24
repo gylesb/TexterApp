@@ -1,13 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TexterApp.Controllers.Models;
 using TexterApp.Models;
+using TexterApp.Controllers;
 
 namespace TexterApp.Controllers
 {
     public class HomeController : Controller
     {
-        //Viewing Messages
-        public IActionResult Index()
+
+		//private readonly TexterAppDbContext _db;
+
+		//public HomeController(TexterAppDbContext db)
+		//{
+		//	_db = db;
+		//}
+
+		//Viewing Messages
+		public IActionResult Index()
         {
             return View();
         }
@@ -31,18 +39,31 @@ namespace TexterApp.Controllers
             return RedirectToAction("Index");
         }
 
-        //Contacts
-        public IActionResult NewContact()
+        //Add Contact
+        public IActionResult AddContact()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult NewContact(Contact item)
+        public IActionResult AddContact(Contact item)
         {
             //db.Contacts.Add(item);
             //db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //Address Book
+        //public IActionResult AddressBook()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public IActionResult ViewContacts()
+        //{
+        //    var ViewContacts = Contact.Contact();
+        //    return View(ViewContacts);
+        //}
     }
 }

@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TexterApp.Controllers.Models
+namespace TexterApp.Models
 {
-    [Table("Contacts")]
+    [Table("Contact")]
     public class Contact
     {
-        public Contact(string contactName, string contactNumber, int id)
+        public Contact(string contactFirstName, string contactLastName, string contactNumber, int id)
         {
             id = ContactId;
-            contactName = Name;
+            contactFirstName = FirstName;
+            contactLastName = LastName;
             contactNumber = Number;
         }
 
         public Contact()
         {
-            
+
         }
 
         [Key]
         public int ContactId { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Number { get; set; }
     }
 }
